@@ -45,4 +45,36 @@ class ArbolBPlus
 
         return BuscarEnNodo(nodo.Hijos[i], codigo);
     }
+
+    // INSERTAR LIBRO
+    public void Insertar(Libro libro)
+    {
+        NodoBPlus r = raiz;
+
+        if (r.NumClaves < 3) 
+        {
+            InsertarNoLleno(r, libro);
+        }
+    }
+
+    private void InsertarNoLleno(NodoBPlus nodo, Libro libro)
+    {
+        int i = nodo.NumClaves - 1; 
+
+        if (nodo.EsHoja) 
+        {
+            while (i >= 0 && 
+                   string.Compare(
+                       libro.Codigo,
+                       nodo.Claves[i].Codigo,
+                       StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                nodo.Claves[i + 1] = nodo.Claves[i];
+                i--;
+            }
+
+            nodo.Claves[i + 1] = libro;
+            nodo.NumClaves++;
+        }
+    }
 }
