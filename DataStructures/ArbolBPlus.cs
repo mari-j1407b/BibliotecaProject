@@ -59,7 +59,6 @@ class ArbolBPlus
             DividirHijo(nuevaRaiz, 0, raiz);
 
             raiz = nuevaRaiz;
-
             InsertarNoLleno(raiz, libro);
         }
         else
@@ -87,9 +86,37 @@ class ArbolBPlus
             nodo.Claves[i + 1] = libro;
             nodo.NumClaves++;
         }
+        else
+        {
+            while (i >= 0 &&
+                   string.Compare(
+                       libro.Codigo,
+                       nodo.Claves[i].Codigo,
+                       StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                i--;
+            }
+
+            i++;
+
+            if (nodo.Hijos[i].NumClaves == 3)
+            {
+                DividirHijo(nodo, i, nodo.Hijos[i]);
+
+                if (string.Compare(
+                    libro.Codigo,
+                    nodo.Claves[i].Codigo,
+                    StringComparison.OrdinalIgnoreCase) > 0)
+                {
+                    i++;
+                }
+            }
+
+            InsertarNoLleno(nodo.Hijos[i], libro);
+        }
     }
 
-    // DIVIDIR NODO
+    // DIVIDIR NODO (SPLIT)
     private void DividirHijo(NodoBPlus padre, int i, NodoBPlus hijo)
     {
         NodoBPlus nuevoNodo = new NodoBPlus(hijo.EsHoja);
@@ -111,6 +138,28 @@ class ArbolBPlus
             }
 
             padre.Claves[i] = nuevoNodo.Claves[0];
+            padre.Hijos[i + 1] = nuevoNodo;
+            padre.NumClaves++;
+        }
+        else
+        {
+            nuevoNodo.Claves[0] = hijo.Claves[2];
+            nuevoNodo.NumClaves = 1;
+
+            nuevoNodo.Hijos[0] = hijo.Hijos[2];
+            nuevoNodo.Hijos[1] = hijo.Hijos[3];
+
+            Libro clavePromovida = hijo.Claves[1];
+
+            hijo.NumClaves = 1;
+
+            for (int j = padre.NumClaves; j > i; j--)
+            {
+                padre.Claves[j] = padre.Claves[j - 1];
+                padre.Hijos[j + 1] = padre.Hijos[j];
+            }
+
+            padre.Claves[i] = clavePromovida;
             padre.Hijos[i + 1] = nuevoNodo;
             padre.NumClaves++;
         }
