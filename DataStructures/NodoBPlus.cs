@@ -18,6 +18,8 @@ class Program
     {
         NodoBPlus nodo = new NodoBPlus();
 
-        Console.WriteLine("Nodo creado");
+//        Console.WriteLine("Nodo creado");
+
+        Console.WriteLine(nodo.Claves.Length);
     }
 }
