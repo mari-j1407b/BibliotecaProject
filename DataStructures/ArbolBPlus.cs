@@ -10,7 +10,7 @@ class ArbolBPlus
         raiz = new NodoBPlus(true);
     }
 
-// Buscar libro por su codigo
+    // BUSCAR LIBRO POR CODIGO
     public Libro Buscar(string codigo)
     {
         return BuscarEnNodo(raiz, codigo);
@@ -21,7 +21,10 @@ class ArbolBPlus
         int i = 0;
 
         while (i < nodo.NumClaves &&
-               string.Compare(codigo, nodo.Claves[i].Codigo) > 0)
+               string.Compare(
+                   codigo,
+                   nodo.Claves[i].Codigo,
+                   StringComparison.OrdinalIgnoreCase) > 0)
         {
             i++;
         }
@@ -29,7 +32,10 @@ class ArbolBPlus
         if (nodo.EsHoja)
         {
             if (i < nodo.NumClaves &&
-                nodo.Claves[i].Codigo == codigo)
+                string.Compare(
+                    codigo,
+                    nodo.Claves[i].Codigo,
+                    StringComparison.OrdinalIgnoreCase) == 0)
             {
                 return nodo.Claves[i];
             }
