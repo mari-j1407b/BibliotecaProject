@@ -36,27 +36,78 @@ class Program
             {
                 case "1": // si la opción es 1 buscamos un libro por código
                     Console.WriteLine("\n=== BUSCAR LIBRO ===");
-                    Console.WriteLine("Funcion en construccion...");
+                    Console.Write("Ingrese el codigo del libro: ");
+                    string codigoBuscar = Console.ReadLine();
+
+                    Libro libroEncontrado = arbolBiblioteca.Buscar(codigoBuscar);
+
+                    if (libroEncontrado != null)
+                    {
+                        Console.WriteLine("\n¡Libro encontrado!");
+                        libroEncontrado.MostrarInformacion();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNo se encontro ningun libro con el codigo: " + codigoBuscar);
+                    }
                     break;
 
                 case "2": // si la opción es 2 prestamos un libro
                     Console.WriteLine("\n=== PRESTAR LIBRO ===");
-                    Console.WriteLine("Funcion en construccion...");
+                    Console.Write("Ingrese el codigo del libro a prestar: ");
+                    string codigoPrestar = Console.ReadLine();
+
+                    Libro libroPrestar = arbolBiblioteca.Buscar(codigoPrestar);
+
+                    if (libroPrestar != null)
+                    {
+                        if (libroPrestar.CopiasDisponibles > 0)
+                        {
+                            libroPrestar.CopiasDisponibles = libroPrestar.CopiasDisponibles - 1;
+                            libroPrestar.VecesPrestado = libroPrestar.VecesPrestado + 1;
+
+                            Console.WriteLine("\n¡Prestamo realizado con exito!");
+                            Console.WriteLine("Libro: " + libroPrestar.Titulo);
+                            Console.WriteLine("Copias restantes: " + libroPrestar.CopiasDisponibles);
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nLo sentimos, no hay copias disponibles de este libro para prestar.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNo se encontro ningun libro con el codigo: " + codigoPrestar);
+                    }
                     break;
 
                 case "3": // si la opción es 3 devolvemos un libro
                     Console.WriteLine("\n=== DEVOLVER LIBRO ===");
-                    Console.WriteLine("Funcion en construccion...");
+                    Console.Write("Ingrese el codigo del libro a devolver: ");
+                    string codigoDevolver = Console.ReadLine();
+
+                    Libro libroDevolver = arbolBiblioteca.Buscar(codigoDevolver);
+
+                    if (libroDevolver != null)
+                    {
+                        libroDevolver.CopiasDisponibles = libroDevolver.CopiasDisponibles + 1;
+
+                        Console.WriteLine("\n¡Devolucion realizada con exito!");
+                        Console.WriteLine("Libro: " + libroDevolver.Titulo);
+                        Console.WriteLine("Copias disponibles ahora: " + libroDevolver.CopiasDisponibles);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNo se encontro ningun libro con el codigo: " + codigoDevolver);
+                    }
                     break;
 
                 case "4": // si la opción es 4 mostramos el top 5 de libros más prestados de la biblioteca
-                    Console.WriteLine("\n=== TOP 5 MAS PRESTADOS ===");
-                    Console.WriteLine("Funcion en construccion...");
+                    maxHeap.MostrarTop(5);
                     break;
 
                 case "5": // si la opción es 5 mostramos el top 5 de libros menos prestados de la biblioteca
-                    Console.WriteLine("\n=== TOP 5 MENOS PRESTADOS ===");
-                    Console.WriteLine("Funcion en construccion...");
+                    minHeap.MostrarTop(5);
                     break;
 
                 case "6": // si la opción es 6 salimos del programa
