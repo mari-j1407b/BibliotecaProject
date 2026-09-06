@@ -40,8 +40,8 @@ class BibliotecaService // clase con los métodos para que funcione la bibliotec
                 // separamos los datos de la línea usando la coma
                 string[] datos = linea.Split(',');
 
-                // verificamos que la línea tenga al menos los 5 datos necesarios
-                if (datos.Length >= 5)
+                // verificamos que la línea tenga los 6 datos necesarios
+                if (datos.Length >= 6)
                 {
                     // obtenemos el código del libro y quitamos espacios innecesarios
                     string codigo = datos[0].Trim();
@@ -52,18 +52,22 @@ class BibliotecaService // clase con los métodos para que funcione la bibliotec
                     // obtenemos el autor del libro
                     string autor = datos[2].Trim();
 
-                    // convertimos el año de texto a número entero
-                    int anio = int.Parse(datos[3].Trim());
+                    // obtenemos la categoría del libro
+                    string categoria = datos[3].Trim();
+
+                    // convertimos las copias disponibles a número entero
+                    int copiasDisponibles = int.Parse(datos[4].Trim());
 
                     // convertimos la cantidad de préstamos a número entero
-                    int vecesPrestado = int.Parse(datos[4].Trim());
+                    int vecesPrestado = int.Parse(datos[5].Trim());
 
-                    // Instanciar el libro
+                    // Instanciar el libro con sus 6 parámetros correspondientes
                     Libro nuevoLibro = new Libro(
                         codigo,
                         titulo,
                         autor,
-                        anio,
+                        categoria,
+                        copiasDisponibles,
                         vecesPrestado);
 
                     // Insertar en las tres estructuras

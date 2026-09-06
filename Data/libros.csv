@@ -1,8 +1,8 @@
-Codigo,Titulo,Autor,Anio,VecesPrestado
-001,Precalculus Mathematics for Calculus,James Stewart,2024,15
-002,Don Quijote de la Mancha,Miguel de Cervantes,1605,25
-003,El Principito,Antoine de Saint-Exupery,1943,5
-004,1984,George Orwell,1949,18
-005,Fahrenheit 451,Ray Bradbury,1953,2
-006,Calculus Early Transcendentals 9th Edition Metric,James Stewart,2020,28
-007,Orgullo y Prejuicio,Jane Austen,1813,8
+Codigo,Titulo,Autor,Categoria,CopiasDisponibles,VecesPrestado
+001,Precalculus Mathematics for Calculus,James Stewart,Matematicas,5,15
+002,Don Quijote de la Mancha,Miguel de Cervantes,Literatura,3,25
+003,El Principito,Antoine de Saint-Exupery,Literatura,4,5
+004,1984,George Orwell,Ficcion,2,18
+005,Fahrenheit 451,Ray Bradbury,Ficcion,6,2
+006,Calculus Early Transcendentals 9th Edition Metric,James Stewart,Matematicas,3,28
+007,Orgullo y Prejuicio,Jane Austen,Romance,2,8
