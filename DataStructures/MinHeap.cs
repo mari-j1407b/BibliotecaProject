@@ -1,4 +1,4 @@
-//  Min heap
+// Min heap
 
 using System;
 
@@ -6,6 +6,7 @@ class MinHeap
 {
     private Libro[] arreglo;
     private int tamanio;
+
     public MinHeap(int capacidad)
     {
         arreglo = new Libro[capacidad];
@@ -29,24 +30,38 @@ class MinHeap
         HeapifyUp(tamanio - 1);
     }
 
+
+
     // Heapify Up
     private void HeapifyUp(int indice)
     {
         while (indice > 0)
         {
             int indicePadre = (indice - 1) / 2;
+
             if (arreglo[indice].VecesPrestado < arreglo[indicePadre].VecesPrestado)
             {
                 Libro temp = arreglo[indice];
                 arreglo[indice] = arreglo[indicePadre];
                 arreglo[indicePadre] = temp;
 
-                indice = indicePadre; 
+                indice = indicePadre;
             }
             else
             {
-                break; 
+                break;
             }
+        }
+    }
+
+
+
+    // Reorganizar el Heap cuando cambia la cantidad de prestamos
+    public void Reorganizar()
+    {
+        for (int i = (tamanio / 2) - 1; i >= 0; i--)
+        {
+            HeapifyDown(i);
         }
     }
 
@@ -59,16 +74,19 @@ class MinHeap
 
         // copia local para no destruir el Heap original
         MinHeap copia = new MinHeap(tamanio);
+
         for (int i = 0; i < tamanio; i++)
         {
             copia.Insertar(arreglo[i]);
         }
 
-        // Extraemos la raiz (cantidad) de veces para obtener los libros menos prestados
+        // Extraemos la raiz para obtener los libros menos prestados
         int limite = Math.Min(cantidad, tamanio);
+
         for (int i = 0; i < limite; i++)
         {
             Libro menosPrestado = copia.ExtraerRaiz();
+
             if (menosPrestado != null)
             {
                 Console.WriteLine((i + 1) + ". " + menosPrestado.Titulo + " (" + menosPrestado.VecesPrestado + " prestamos)");
@@ -81,19 +99,22 @@ class MinHeap
     // EXTRAER RAIZ (elemento menor)
     public Libro ExtraerRaiz()
     {
-        if (tamanio == 0) return null;
+        if (tamanio == 0)
+            return null;
 
         Libro raiz = arreglo[0];
 
-        arreglo[0] = arreglo[tamanio - 1]; // mover el ultimo a la raiz
+        arreglo[0] = arreglo[tamanio - 1];
         tamanio--;
+
         HeapifyDown(0);
 
         return raiz;
     }
 
 
-    // Heapify Down:
+
+    // Heapify Down
     private void HeapifyDown(int indice)
     {
         while (indice < tamanio)
@@ -102,12 +123,14 @@ class MinHeap
             int hijoDerecho = (2 * indice) + 2;
             int menor = indice;
 
-            if (hijoIzquierdo < tamanio && arreglo[hijoIzquierdo].VecesPrestado < arreglo[menor].VecesPrestado)
+            if (hijoIzquierdo < tamanio &&
+                arreglo[hijoIzquierdo].VecesPrestado < arreglo[menor].VecesPrestado)
             {
                 menor = hijoIzquierdo;
             }
 
-            if (hijoDerecho < tamanio && arreglo[hijoDerecho].VecesPrestado < arreglo[menor].VecesPrestado)
+            if (hijoDerecho < tamanio &&
+                arreglo[hijoDerecho].VecesPrestado < arreglo[menor].VecesPrestado)
             {
                 menor = hijoDerecho;
             }
@@ -118,11 +141,11 @@ class MinHeap
                 arreglo[indice] = arreglo[menor];
                 arreglo[menor] = temp;
 
-                indice = menor; 
+                indice = menor;
             }
             else
             {
-                break; 
+                break;
             }
         }
     }

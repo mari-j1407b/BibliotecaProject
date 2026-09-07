@@ -66,6 +66,10 @@ class Program
                             libroPrestar.CopiasDisponibles = libroPrestar.CopiasDisponibles - 1;
                             libroPrestar.VecesPrestado = libroPrestar.VecesPrestado + 1;
 
+                            // Reorganizar los heaps porque cambio la cantidad de prestamos
+                            maxHeap.Reorganizar();
+                            minHeap.Reorganizar();
+
                             Console.WriteLine("\n¡Prestamo realizado con exito!");
                             Console.WriteLine("Libro: " + libroPrestar.Titulo);
                             Console.WriteLine("Copias restantes: " + libroPrestar.CopiasDisponibles);
