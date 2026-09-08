@@ -11,7 +11,7 @@ class Program
         MinHeap minHeap = new MinHeap(100);
 
         // Cargar datos del CSV al iniciar
-        BibliotecaService.CargarDatosCSV("libros.csv", arbolBiblioteca, maxHeap, minHeap);
+        BibliotecaService.CargarDatosCSV("Data/libros.csv", arbolBiblioteca, maxHeap, minHeap);
 
         string opcion = ""; // almacenamos la opcion elegida por el usuario
 
